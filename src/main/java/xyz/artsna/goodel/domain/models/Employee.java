@@ -2,12 +2,14 @@ package xyz.artsna.goodel.domain.models;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import xyz.artsna.goodel.infra.database.entities.EmployeeEntity;
 import xyz.artsna.goodel.infra.database.enums.EmployeeFunction;
 
 import java.util.UUID;
 
 @Data
+@EqualsAndHashCode
 @AllArgsConstructor
 public class Employee {
 

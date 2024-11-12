@@ -29,9 +29,6 @@ public class ProductEntity extends PanacheEntityBase {
     @OneToMany(cascade= CascadeType.ALL, mappedBy="store")
     private Set<ComplementCategoryEntity> complementCategories;
 
-    @OneToMany(cascade= CascadeType.ALL, mappedBy="store")
-    private Set<ComplementEntity> complements;
-
     @ManyToOne
     @JoinColumn(name = "category_id", nullable = false)
     private ProductCategoryEntity category;
@@ -49,5 +46,4 @@ public class ProductEntity extends PanacheEntityBase {
         this.category = category;
         this.store = store;
     }
-
 }

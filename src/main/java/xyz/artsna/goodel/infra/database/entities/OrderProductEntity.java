@@ -2,12 +2,18 @@ package xyz.artsna.goodel.infra.database.entities;
 
 import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
 import jakarta.persistence.*;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 import xyz.artsna.goodel.infra.database.keys.OrderProductEntityKey;
 
 import java.util.Set;
 
 @Entity
 @Table(name = "goodel_order_products")
+@Data
+@EqualsAndHashCode(callSuper = true)
+@NoArgsConstructor
 public class OrderProductEntity extends PanacheEntityBase {
 
     @EmbeddedId private OrderProductEntityKey key;

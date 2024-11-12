@@ -2,12 +2,14 @@ package xyz.artsna.goodel.domain.models;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import xyz.artsna.goodel.infra.database.entities.AddressEntity;
 
 import java.util.UUID;
 
 @Data
 @AllArgsConstructor
+@EqualsAndHashCode
 public class Address {
 
     private UUID id;
@@ -34,5 +36,4 @@ public class Address {
         this.reference = entity.getReference();
         this.client = new Client(entity.getClient());
     }
-
 }

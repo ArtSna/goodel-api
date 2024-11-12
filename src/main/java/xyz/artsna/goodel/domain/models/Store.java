@@ -2,6 +2,7 @@ package xyz.artsna.goodel.domain.models;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import xyz.artsna.goodel.infra.database.entities.*;
 
 import java.util.List;
@@ -9,6 +10,7 @@ import java.util.UUID;
 
 @Data
 @AllArgsConstructor
+@EqualsAndHashCode
 public class Store {
 
     private UUID id;
@@ -59,5 +61,4 @@ public class Store {
         this.employees = store.getEmployees().stream().map(Employee::new).toList();
         this.clients = store.getClients().stream().map(Client::new).toList();
     }
-
 }

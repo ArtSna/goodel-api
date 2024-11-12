@@ -2,6 +2,7 @@ package xyz.artsna.goodel.domain.models;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import xyz.artsna.goodel.infra.database.entities.ClientEntity;
 
 import java.util.List;
@@ -9,6 +10,7 @@ import java.util.UUID;
 
 @Data
 @AllArgsConstructor
+@EqualsAndHashCode
 public class Client {
     private UUID id;
 
@@ -31,6 +33,4 @@ public class Client {
         this.phone = entity.getPhone();
         this.addresses = entity.getAddresses().stream().map(Address::new).toList();
     }
-
-
 }
