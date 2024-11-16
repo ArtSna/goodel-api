@@ -25,6 +25,8 @@ public class Store {
     private String contactPhone;
 
     private String street;
+    private Integer streetNumber;
+    private String complementaryAddress;
     private String city;
     private String state;
     private String zipCode;
@@ -33,8 +35,6 @@ public class Store {
 
     private boolean active;
 
-    private List<ProductCategory> categories;
-    private List<Product> products;
     private List<Employee> employees;
     private List<Client> clients;
 
@@ -49,6 +49,8 @@ public class Store {
         this.contactEmail = store.getContactEmail();
         this.contactPhone = store.getContactPhone();
         this.street = store.getStreet();
+        this.streetNumber = store.getStreetNumber();
+        this.complementaryAddress = store.getComplementaryAddress();
         this.city = store.getCity();
         this.state = store.getState();
         this.zipCode = store.getZipCode();
@@ -56,9 +58,7 @@ public class Store {
         this.reference = store.getReference();
         this.active = store.isActive();
         this.owner = new User(store.getOwner());
-        this.categories = store.getCategories().stream().map(ProductCategory::new).toList();
-        this.products = store.getProducts().stream().map(Product::new).toList();
-        this.employees = store.getEmployees().stream().map(Employee::new).toList();
-        this.clients = store.getClients().stream().map(Client::new).toList();
+        //this.employees = store.getEmployees().stream().map(Employee::new).toList();
+        //this.clients = store.getClients().stream().map(Client::new).toList();
     }
 }

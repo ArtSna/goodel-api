@@ -1,5 +1,6 @@
 package xyz.artsna.goodel.infra.database.entities;
 
+import io.quarkus.arc.impl.Sets;
 import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
 import jakarta.persistence.*;
 import lombok.Data;
@@ -28,31 +29,27 @@ public class StoreEntity extends PanacheEntityBase {
     @Column(nullable = false, name = "contact_phone") private String contactPhone;
 
     @Column(nullable = false) private String street;
+    @Column(nullable = false, name = "street_number") private Integer streetNumber;
+    @Column(name = "complementary_address") private String complementaryAddress;
     @Column(nullable = false) private String city;
     @Column(nullable = false) private String state;
     @Column(nullable = false, name = "zip_code") private String zipCode;
     @Column(nullable = false) private String country;
-    @Column(nullable = false) private String reference;
+    private String reference;
 
     private boolean active = true;
 
-    @OneToMany(cascade= CascadeType.ALL, mappedBy="store")
-    private Set<ProductCategoryEntity> categories;
+    @OneToMany(cascade= CascadeType.ALL, mappedBy="store", fetch = FetchType.LAZY)
+    private Set<EmployeeEntity> employees = Sets.of();
 
-    @OneToMany(cascade= CascadeType.ALL, mappedBy="store")
-    private Set<ProductEntity> products;
-
-    @OneToMany(cascade= CascadeType.ALL, mappedBy="store")
-    private Set<EmployeeEntity> employees;
-
-    @OneToMany(cascade= CascadeType.ALL, mappedBy="store")
-    private Set<ClientEntity> clients;
+    @OneToMany(cascade= CascadeType.ALL, mappedBy="store", fetch = FetchType.LAZY)
+    private Set<ClientEntity> clients = Sets.of();
 
     @ManyToOne
-    @JoinColumn(name="ownerId", nullable=false)
+    @JoinColumn(name="owner_id", nullable=false)
     private UserEntity owner;
 
-    public StoreEntity(UserEntity owner, String domain, String customDomain, String name, String description, String contactEmail, String contactPhone, String street, String city, String state, String zipCode, String country, String reference) {
+    public StoreEntity(UserEntity owner, String domain, String customDomain, String name, String description, String contactEmail, String contactPhone, String street, Integer streetNumber, String complementaryAddress, String city, String state, String zipCode, String country, String reference) {
         this.id = UUID.randomUUID();
         this.owner = owner;
         this.domain = domain;
@@ -62,6 +59,8 @@ public class StoreEntity extends PanacheEntityBase {
         this.contactEmail = contactEmail;
         this.contactPhone = contactPhone;
         this.street = street;
+        this.streetNumber = streetNumber;
+        this.complementaryAddress = complementaryAddress;
         this.city = city;
         this.state = state;
         this.zipCode = zipCode;

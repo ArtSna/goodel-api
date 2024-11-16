@@ -1,4 +1,13 @@
 package xyz.artsna.goodel.infra.database.repositories;
 
-public class StoreRepository {
+import io.quarkus.hibernate.orm.panache.PanacheRepositoryBase;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.transaction.Transactional;
+import xyz.artsna.goodel.infra.database.entities.StoreEntity;
+
+import java.util.UUID;
+
+@Transactional
+@ApplicationScoped
+public class StoreRepository implements PanacheRepositoryBase<StoreEntity, UUID> {
 }

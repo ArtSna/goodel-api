@@ -1,5 +1,6 @@
 package xyz.artsna.goodel.api.reponses.client;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
 import xyz.artsna.goodel.domain.models.Address;
 
@@ -14,7 +15,7 @@ public class AddressResponse {
         public String street;
         public String city;
         public String state;
-        public String zipCode;
+        @JsonProperty("zip_code") public String zipCode;
         public String country;
         public String reference;
 

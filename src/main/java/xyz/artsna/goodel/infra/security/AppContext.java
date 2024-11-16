@@ -1,19 +1,10 @@
 package xyz.artsna.goodel.infra.security;
 
 import jakarta.ws.rs.core.SecurityContext;
-import lombok.Getter;
-import org.jetbrains.annotations.NotNull;
 
 import java.security.Principal;
 
-@Getter
-public class AppContext implements SecurityContext {
-
-    private final Subject subject;
-
-    public AppContext(Subject subject) {
-        this.subject = subject;
-    }
+public record AppContext(Subject subject) implements SecurityContext {
 
     @Override
     public Principal getUserPrincipal() {
@@ -21,7 +12,7 @@ public class AppContext implements SecurityContext {
     }
 
     @Override
-    public boolean isUserInRole(@NotNull String role) {
+    public boolean isUserInRole(String role) {
         return role.equalsIgnoreCase(subject.getSubjectType().toString());
     }
 

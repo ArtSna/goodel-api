@@ -29,6 +29,6 @@ public class User {
         this.lastName = entity.getLastName();
         this.email = entity.getEmail();
         this.password = entity.getPassword();
-        this.stores = entity.getStores().stream().map(Store::new).toList();
+        //this.stores = entity.getStores().stream().map(Store::new).toList();
     }
 }
