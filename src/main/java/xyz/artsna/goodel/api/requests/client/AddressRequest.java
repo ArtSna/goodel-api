@@ -1,8 +1,10 @@
 package xyz.artsna.goodel.api.requests.client;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 import lombok.Getter;
+import org.hibernate.validator.constraints.UUID;
 
 @Data
 public class AddressRequest {
@@ -26,7 +28,15 @@ public class AddressRequest {
         private String country;
 
         @NotBlank(message = "Zip Code must be not blank")
+        @JsonProperty("zip_code")
         private String zipCode;
+
+        private Integer number;
+
+        private String complement;
+
+        @UUID(message = "Neighborhood must be a valid uuid", allowNil = false)
+        private String neighborhood;
 
         private String reference;
     }
@@ -37,9 +47,14 @@ public class AddressRequest {
         private String street;
         private String city;
         private String state;
-        private String country;
+        @JsonProperty("zip_code")
         private String zipCode;
+        private Integer number;
+        private String country;
+        private String complement;
         private String reference;
+        @UUID(message = "Neighborhood must be a valid uuid", allowEmpty = true)
+        private String neighborhood;
     }
 
 }

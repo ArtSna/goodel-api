@@ -28,14 +28,15 @@ public class StoreEntity extends PanacheEntityBase {
     @Column(name = "contact_email") private String contactEmail;
     @Column(nullable = false, name = "contact_phone") private String contactPhone;
 
-    @Column(nullable = false) private String street;
-    @Column(nullable = false, name = "street_number") private Integer streetNumber;
-    @Column(name = "complementary_address") private String complementaryAddress;
-    @Column(nullable = false) private String city;
-    @Column(nullable = false) private String state;
-    @Column(nullable = false, name = "zip_code") private String zipCode;
-    @Column(nullable = false) private String country;
-    private String reference;
+    @Column(nullable = false, name = "address_street") private String addressStreet;
+    @Column(nullable = false, name = "address_number") private Integer addressNumber;
+    @Column(nullable = false, name = "address_city") private String addressCity;
+    @Column(nullable = false, name = "address_state") private String addressState;
+    @Column(nullable = false, name = "address_zip_code") private String addressZipCode;
+    @Column(nullable = false, name = "address_country") private String addressCountry;
+    @Column(nullable = false, name = "address_neighborhood") private String addressNeighborhood;
+    @Column(name = "address_complement") private String addressComplement;
+    @Column(name = "address_reference") private String addressReference;
 
     private boolean active = true;
 
@@ -45,11 +46,14 @@ public class StoreEntity extends PanacheEntityBase {
     @OneToMany(cascade= CascadeType.ALL, mappedBy="store", fetch = FetchType.LAZY)
     private Set<ClientEntity> clients = Sets.of();
 
+    @OneToMany(cascade= CascadeType.ALL, mappedBy="store", fetch = FetchType.LAZY)
+    private Set<NeighborhoodEntity> neighborhoods = Sets.of();
+
     @ManyToOne
     @JoinColumn(name="owner_id", nullable=false)
     private UserEntity owner;
 
-    public StoreEntity(UserEntity owner, String domain, String customDomain, String name, String description, String contactEmail, String contactPhone, String street, Integer streetNumber, String complementaryAddress, String city, String state, String zipCode, String country, String reference) {
+    public StoreEntity(UserEntity owner, String domain, String customDomain, String name, String description, String contactEmail, String contactPhone, String addressStreet, Integer addressNumber, String addressComplement, String addressCity, String addressState, String addressZipCode, String addressCountry, String addressReference, String addressNeighborhood) {
         this.id = UUID.randomUUID();
         this.owner = owner;
         this.domain = domain;
@@ -58,13 +62,15 @@ public class StoreEntity extends PanacheEntityBase {
         this.description = description;
         this.contactEmail = contactEmail;
         this.contactPhone = contactPhone;
-        this.street = street;
-        this.streetNumber = streetNumber;
-        this.complementaryAddress = complementaryAddress;
-        this.city = city;
-        this.state = state;
-        this.zipCode = zipCode;
-        this.country = country;
-        this.reference = reference;
+
+        this.addressStreet = addressStreet;
+        this.addressNumber = addressNumber;
+        this.addressComplement = addressComplement;
+        this.addressCity = addressCity;
+        this.addressState = addressState;
+        this.addressZipCode = addressZipCode;
+        this.addressCountry = addressCountry;
+        this.addressReference = addressReference;
+        this.addressNeighborhood = addressNeighborhood;
     }
 }

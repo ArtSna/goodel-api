@@ -21,6 +21,9 @@ public class Address {
     private String state;
     private String zipCode;
     private String country;
+    private Integer number;
+    private String complement;
+    private Neighborhood neighborhood;
     private String reference;
 
     private Client client;

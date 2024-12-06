@@ -20,23 +20,22 @@ public class StoreRequest {
         @JsonProperty("contact_phone")
         private String contactPhone;
 
-        @NotBlank(message = "Street can't be blank")
-        private String street;
-        @NotNull(message = "Street Number can't be null")
-        @JsonProperty("street_number")
-        private Integer streetNumber;
-        @JsonProperty("complementary_address")
-        private String complementaryAddress;
-        @NotBlank(message = "City can't be blank")
-        private String city;
-        @NotBlank(message = "State can't be blank")
-        private String state;
-        @NotBlank(message = "Zip Code can't be blank")
-        @JsonProperty("zip_code")
-        private String zipCode;
-        private String reference;
-        @NotBlank(message = "Country can't be blank")
-        private String country;
+        @NotBlank(message = "Address Street can't be blank")
+        @JsonProperty("address_street")  private String addressStreet;
+        @NotNull(message = "Address Number can't be null")
+        @JsonProperty("address_number") private Integer addressNumber;
+        @JsonProperty("address_complement") private String addressComplement;
+        @NotBlank(message = "Address City can't be blank")
+        @JsonProperty("address_city") private String addressCity;
+        @NotBlank(message = "Address State can't be blank")
+        @JsonProperty("address_state") private String addressState;
+        @NotBlank(message = "Address Zip Code can't be blank")
+        @JsonProperty("address_zip_code") private String addressZipCode;
+        @JsonProperty("address_reference") private String addressReference;
+        @NotBlank(message = "Address Country can't be blank")
+        @JsonProperty("address_country") private String addressCountry;
+        @NotBlank(message = "Address Neighborhood can't be blank")
+        @JsonProperty("address_neighborhood") private String addressNeighborhood;
 
         @NotBlank(message = "Domain can't be blank")
         private String domain;
@@ -52,14 +51,15 @@ public class StoreRequest {
         @JsonProperty("contact_email") private String contactEmail;
         @JsonProperty("contact_phone") private String contactPhone;
 
-        private String street;
-        @JsonProperty("street_number") private Integer streetNumber;
-        @JsonProperty("complementary_address") private String complementaryAddress;
-        private String city;
-        private String state;
-        @JsonProperty("zip_code") private String zipCode;
-        private String reference;
-        private String country;
+        @JsonProperty("address_street")  private String addressStreet;
+        @JsonProperty("address_number") private Integer addressNumber;
+        @JsonProperty("address_complement") private String addressComplement;
+        @JsonProperty("address_city") private String addressCity;
+        @JsonProperty("address_state") private String addressState;
+        @JsonProperty("address_zip_code") private String addressZipCode;
+        @JsonProperty("address_reference") private String addressReference;
+        @JsonProperty("address_country") private String addressCountry;
+        @JsonProperty("address_neighborhood") private String addressNeighborhood;
 
         private String domain;
         @JsonProperty("custom_domain") private String customDomain;

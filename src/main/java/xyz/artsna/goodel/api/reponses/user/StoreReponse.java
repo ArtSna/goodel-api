@@ -22,14 +22,15 @@ public class StoreReponse {
         @JsonProperty("contact_email") public String contactEmail;
         @JsonProperty("contact_phone") public String contactPhone;
 
-        public String street;
-        @JsonProperty("street_number") public Integer streetNumber;
-        @JsonProperty("complementary_address") public String complementaryAddress;
-        public String city;
-        public String state;
-        @JsonProperty("zip_code") public String zipCode;
-        public String country;
-        public String reference;
+        @JsonProperty("address_street")  private String addressStreet;
+        @JsonProperty("address_number") private Integer addressNumber;
+        @JsonProperty("address_complement") private String addressComplement;
+        @JsonProperty("address_city") private String addressCity;
+        @JsonProperty("address_state") private String addressState;
+        @JsonProperty("address_zip_code") private String addressZipCode;
+        @JsonProperty("address_reference") private String addressReference;
+        @JsonProperty("address_country") private String addressCountry;
+        @JsonProperty("address_neighborhood") private String addressNeighborhood;
 
         public boolean active;
 
@@ -41,17 +42,17 @@ public class StoreReponse {
             this.description = store.getDescription();
             this.contactEmail = store.getContactEmail();
             this.contactPhone = store.getContactPhone();
-            this.street = store.getStreet();
-            this.streetNumber = store.getStreetNumber();
-            this.complementaryAddress = store.getComplementaryAddress();
-            this.city = store.getCity();
-            this.state = store.getState();
-            this.zipCode = store.getZipCode();
-            this.country = store.getCountry();
-            this.reference = store.getReference();
+            this.addressStreet = store.getStoreAddress().getStreet();
+            this.addressNumber = store.getStoreAddress().getNumber();
+            this.addressComplement = store.getStoreAddress().getComplement();
+            this.addressCity = store.getStoreAddress().getCity();
+            this.addressState = store.getStoreAddress().getState();
+            this.addressZipCode = store.getStoreAddress().getZipCode();
+            this.addressReference = store.getStoreAddress().getReference();
+            this.addressCountry = store.getStoreAddress().getCountry();
+            this.addressNeighborhood = store.getStoreAddress().getNeighborhood();
             this.active = store.isActive();
         }
-
     }
 
     @JsonRootName("stores")

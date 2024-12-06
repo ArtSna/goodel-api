@@ -23,11 +23,11 @@ public class AddressController extends AbstractControllerBase {
     @Inject AddressService addresses;
 
     @GET
-    @Path("/{id}")
+    @Path("/{addressId}")
     @RolesAllowed("CLIENT")
-    public Response getById(@Context SecurityContext context, @PathParam("id") UUID id) {
+    public Response getById(@Context SecurityContext context, @PathParam("addressId") UUID addressId) {
         var subject = validateSubject(context.getUserPrincipal());
-        return Response.ok(new AddressResponse.Single(addresses.getById(subject.getId(), id))).build();
+        return Response.ok(new AddressResponse.Single(addresses.getById(subject.getId(), addressId))).build();
     }
 
     @GET
@@ -47,17 +47,17 @@ public class AddressController extends AbstractControllerBase {
 
     @PUT
     @RolesAllowed("CLIENT")
-    public Response update(@Context SecurityContext context, @Valid AddressRequest.Update request) {
+    public Response update(@Context SecurityContext context, @PathParam("addressId") UUID addressId, @Valid AddressRequest.Update request) {
         var subject = validateSubject(context.getUserPrincipal());
-        return Response.ok(new AddressResponse.Single(addresses.update(subject.getId(), request))).build();
+        return Response.ok(new AddressResponse.Single(addresses.update(subject.getId(), addressId, request))).build();
     }
 
     @DELETE
-    @Path("/{id}")
+    @Path("/{addressId}")
     @RolesAllowed("CLIENT")
-    public Response delete(@Context SecurityContext context, @PathParam("id") UUID id) {
+    public Response delete(@Context SecurityContext context, @PathParam("addressId") UUID addressId) {
         var subject = validateSubject(context.getUserPrincipal());
-        addresses.delete(subject.getId(), id);
+        addresses.delete(subject.getId(), addressId);
         return Response.noContent().build();
     }
 }

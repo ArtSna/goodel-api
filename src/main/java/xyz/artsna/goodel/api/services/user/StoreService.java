@@ -30,7 +30,24 @@ public class StoreService {
         if(stores.find("name = ?1 and owner = ?2", request.getName(), owner).count() > 0)
             throw new ConflictException("This store name already exists");
 
-        var entity = new StoreEntity(owner, request.getDomain(), request.getCustomDomain(), request.getName(), request.getDescription(), request.getContactEmail(), request.getContactPhone(), request.getStreet(), request.getStreetNumber(), request.getComplementaryAddress(), request.getCity(), request.getState(), request.getZipCode(), request.getCountry(), request.getReference());
+        var entity = new StoreEntity(
+                owner,
+                request.getDomain(),
+                request.getCustomDomain(),
+                request.getName(),
+                request.getDescription(),
+                request.getContactEmail(),
+                request.getContactPhone(),
+                request.getAddressStreet(),
+                request.getAddressNumber(),
+                request.getAddressComplement(),
+                request.getAddressCity(),
+                request.getAddressState(),
+                request.getAddressZipCode(),
+                request.getAddressCountry(),
+                request.getAddressReference(),
+                request.getAddressNeighborhood()
+        );
         stores.persistAndFlush(entity);
 
         return new Store(entity);
@@ -63,22 +80,26 @@ public class StoreService {
             store.setContactEmail(request.getContactEmail());
         if(request.getContactPhone() != null)
             store.setContactPhone(request.getContactPhone());
-        if(request.getStreet() != null)
-            store.setStreet(request.getStreet());
-        if(request.getStreetNumber() != null)
-            store.setStreetNumber(request.getStreetNumber());
-        if(request.getComplementaryAddress() != null)
-            store.setComplementaryAddress(request.getComplementaryAddress());
-        if(request.getCity() != null)
-            store.setCity(request.getCity());
-        if(request.getState() != null)
-            store.setState(request.getState());
-        if(request.getZipCode() != null)
-            store.setZipCode(request.getZipCode());
-        if(request.getCountry() != null)
-            store.setCountry(request.getCountry());
-        if(request.getReference() != null)
-            store.setReference(request.getReference());
+
+        if(request.getAddressStreet() != null)
+            store.setAddressStreet(request.getAddressStreet());
+        if(request.getAddressNumber() != null)
+            store.setAddressNumber(request.getAddressNumber());
+        if(request.getAddressComplement() != null)
+            store.setAddressComplement(request.getAddressComplement());
+        if(request.getAddressCity() != null)
+            store.setAddressCity(request.getAddressCity());
+        if(request.getAddressState() != null)
+            store.setAddressState(request.getAddressState());
+        if(request.getAddressZipCode() != null)
+            store.setAddressZipCode(request.getAddressZipCode());
+        if(request.getAddressCountry() != null)
+            store.setAddressCountry(request.getAddressCountry());
+        if(request.getAddressReference() != null)
+            store.setAddressReference(request.getAddressReference());
+        if(request.getAddressNeighborhood() != null)
+            store.setAddressNeighborhood(request.getAddressNeighborhood());
+
 
         store.persistAndFlush();
 

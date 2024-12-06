@@ -24,19 +24,13 @@ public class Store {
     private String contactEmail;
     private String contactPhone;
 
-    private String street;
-    private Integer streetNumber;
-    private String complementaryAddress;
-    private String city;
-    private String state;
-    private String zipCode;
-    private String country;
-    private String reference;
+    private StoreAddress storeAddress;
 
     private boolean active;
 
     private List<Employee> employees;
     private List<Client> clients;
+    private List<Neighborhood> neighborhoods;
 
     private User owner;
 
@@ -48,17 +42,38 @@ public class Store {
         this.description = store.getDescription();
         this.contactEmail = store.getContactEmail();
         this.contactPhone = store.getContactPhone();
-        this.street = store.getStreet();
-        this.streetNumber = store.getStreetNumber();
-        this.complementaryAddress = store.getComplementaryAddress();
-        this.city = store.getCity();
-        this.state = store.getState();
-        this.zipCode = store.getZipCode();
-        this.country = store.getCountry();
-        this.reference = store.getReference();
+        this.storeAddress = new StoreAddress(
+                store.getAddressStreet(),
+                store.getAddressCity(),
+                store.getAddressState(),
+                store.getAddressZipCode(),
+                store.getAddressCountry(),
+                store.getAddressNumber(),
+                store.getAddressComplement(),
+                store.getAddressNeighborhood(),
+                store.getAddressReference()
+        );
         this.active = store.isActive();
         this.owner = new User(store.getOwner());
-        //this.employees = store.getEmployees().stream().map(Employee::new).toList();
-        //this.clients = store.getClients().stream().map(Client::new).toList();
+        this.employees = store.getEmployees().stream().map(Employee::new).toList();
+        this.clients = store.getClients().stream().map(Client::new).toList();
+        this.neighborhoods = store.getNeighborhoods().stream().map(Neighborhood::new).toList();
+    }
+
+    @Data
+    @EqualsAndHashCode
+    @AllArgsConstructor
+    public static class StoreAddress {
+
+        private String street;
+        private String city;
+        private String state;
+        private String zipCode;
+        private String country;
+        private Integer number;
+        private String complement;
+        private String neighborhood;
+        private String reference;
+
     }
 }

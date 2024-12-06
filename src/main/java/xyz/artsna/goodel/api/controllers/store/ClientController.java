@@ -25,7 +25,7 @@ public class ClientController {
     @GET
     @Path("/{clientId}")
     @RolesAllowed("")
-    public Response getClient(UUID clientId) {
+    public Response getClient(@PathParam("clientId") UUID clientId) {
         return Response.ok().build();
     }
 
@@ -41,7 +41,7 @@ public class ClientController {
 
     @PUT
     @Path("/{clientId}")
-    public Response update(@Valid ClientRequest.Update request) {
+    public Response update(@PathParam("clientId") UUID clientId, @Valid ClientRequest.Update request) {
         return Response.ok().build();
     }
 
