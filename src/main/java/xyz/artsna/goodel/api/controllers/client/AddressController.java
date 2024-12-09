@@ -32,7 +32,7 @@ public class AddressController extends AbstractControllerBase {
 
     @GET
     @RolesAllowed("CLIENT")
-    public Response getById(@Context SecurityContext context) {
+    public Response getAll(@Context SecurityContext context) {
         var subject = validateSubject(context.getUserPrincipal());
         return Response.ok(new AddressResponse.Multiple(addresses.getAllByClient(subject.getId()))).build();
     }
@@ -47,6 +47,7 @@ public class AddressController extends AbstractControllerBase {
 
     @PUT
     @RolesAllowed("CLIENT")
+    @Path("/{addressId}")
     public Response update(@Context SecurityContext context, @PathParam("addressId") UUID addressId, @Valid AddressRequest.Update request) {
         var subject = validateSubject(context.getUserPrincipal());
         return Response.ok(new AddressResponse.Single(addresses.update(subject.getId(), addressId, request))).build();

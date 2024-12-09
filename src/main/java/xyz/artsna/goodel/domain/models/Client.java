@@ -12,6 +12,7 @@ import java.util.UUID;
 @AllArgsConstructor
 @EqualsAndHashCode
 public class Client {
+
     private UUID id;
 
     private String firstName;
@@ -22,8 +23,6 @@ public class Client {
 
     private String phone;
 
-    private List<Address> addresses;
-
     public Client(ClientEntity entity) {
         this.id = entity.getId();
         this.firstName = entity.getFirstName();
@@ -31,6 +30,5 @@ public class Client {
         this.email = entity.getEmail();
         this.password = entity.getPassword();
         this.phone = entity.getPhone();
-        this.addresses = entity.getAddresses().stream().map(Address::new).toList();
     }
 }

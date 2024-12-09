@@ -2,6 +2,7 @@ package xyz.artsna.goodel.api.reponses.client;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
+import xyz.artsna.goodel.api.reponses.store.NeighborhoodResponse;
 import xyz.artsna.goodel.domain.models.Address;
 
 import java.util.List;
@@ -18,6 +19,7 @@ public class AddressResponse {
         @JsonProperty("zip_code") public String zipCode;
         public String country;
         public String reference;
+        public NeighborhoodResponse.Single neighborhood;
 
         public Single(Address address) {
             this.id = address.getId();
@@ -28,6 +30,7 @@ public class AddressResponse {
             this.zipCode = address.getZipCode();
             this.country = address.getCountry();
             this.reference = address.getReference();
+            this.neighborhood = new NeighborhoodResponse.Single(address.getNeighborhood());
         }
     }
 

@@ -2,6 +2,7 @@ package xyz.artsna.goodel.api.services.store;
 
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
+import jakarta.transaction.Transactional;
 import xyz.artsna.goodel.api.requests.store.NeighborhoodRequest;
 import xyz.artsna.goodel.domain.exceptions.ConflictException;
 import xyz.artsna.goodel.domain.exceptions.NotFoundException;
@@ -45,6 +46,7 @@ public class NeighborhoodService {
         return neighborhoods.find("store", store).stream().map(Neighborhood::new).toList();
     }
 
+    @Transactional
     public Neighborhood update(UUID storeId, UUID neighborhoodId, NeighborhoodRequest.Update request) {
         StoreEntity store = stores.findByIdOptional(storeId).orElseThrow(() -> new NotFoundException("Store not found"));
         var entity = neighborhoods.find("store=?1 and id=?2", store, neighborhoodId).firstResultOptional().orElseThrow(() -> new NotFoundException("Neighborhood not found"));
@@ -54,7 +56,8 @@ public class NeighborhoodService {
         if(request.getDeliveryFee() != null)
             entity.setDeliveryFee(request.getDeliveryFee());
 
-        neighborhoods.persistAndFlush(entity);
+        neighborhoods.getEntityManager().merge(entity);
+        neighborhoods.flush();
 
         return new Neighborhood(entity);
     }

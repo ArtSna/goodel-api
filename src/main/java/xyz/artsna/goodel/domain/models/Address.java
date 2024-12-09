@@ -25,9 +25,7 @@ public class Address {
     private String complement;
     private Neighborhood neighborhood;
     private String reference;
-
-    private Client client;
-
+    
     public Address(AddressEntity entity) {
         this.id = entity.getId();
         this.name = entity.getName();
@@ -37,6 +35,6 @@ public class Address {
         this.zipCode = entity.getZipCode();
         this.country = entity.getCountry();
         this.reference = entity.getReference();
-        this.client = new Client(entity.getClient());
+        this.neighborhood = new Neighborhood(entity.getNeighborhood());
     }
 }

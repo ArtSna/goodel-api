@@ -23,15 +23,12 @@ public class Employee {
 
     private EmployeeFunction function;
 
-    private Store store;
-
     public Employee(EmployeeEntity entity) {
         this.id = entity.getId();
         this.firstName = entity.getFirstName();
         this.lastName = entity.getLastName();
         this.email = entity.getEmail();
         this.function = entity.getFunction();
-        this.store = new Store(entity.getStore());
         this.password = entity.getPassword();
     }
 }

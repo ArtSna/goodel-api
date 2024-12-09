@@ -4,20 +4,19 @@ import io.quarkus.arc.impl.Sets;
 import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
 import jakarta.persistence.*;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
+import java.util.Objects;
 import java.util.Set;
 import java.util.UUID;
 
 @Entity
 @Table(name = "goodel-stores")
 @Data
-@EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
 public class StoreEntity extends PanacheEntityBase {
 
-    @Id private UUID id;
+    @Id private UUID id = UUID.randomUUID();
 
     @Column(nullable = false, unique = true) private String domain;
     @Column(name = "custom_domain") private String customDomain;
@@ -54,7 +53,6 @@ public class StoreEntity extends PanacheEntityBase {
     private UserEntity owner;
 
     public StoreEntity(UserEntity owner, String domain, String customDomain, String name, String description, String contactEmail, String contactPhone, String addressStreet, Integer addressNumber, String addressComplement, String addressCity, String addressState, String addressZipCode, String addressCountry, String addressReference, String addressNeighborhood) {
-        this.id = UUID.randomUUID();
         this.owner = owner;
         this.domain = domain;
         this.customDomain = customDomain;
@@ -72,5 +70,18 @@ public class StoreEntity extends PanacheEntityBase {
         this.addressCountry = addressCountry;
         this.addressReference = addressReference;
         this.addressNeighborhood = addressNeighborhood;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id); // Use apenas campos simples (como `id`)
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+        StoreEntity that = (StoreEntity) obj;
+        return Objects.equals(id, that.getId()); // Compare apenas identificadores únicos
     }
 }

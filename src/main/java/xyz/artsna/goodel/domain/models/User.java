@@ -21,14 +21,11 @@ public class User {
     private String email;
     private String password;
 
-    private List<Store> stores;
-
     public User(UserEntity entity) {
         this.id = entity.getId();
         this.firstName = entity.getFirstName();
         this.lastName = entity.getLastName();
         this.email = entity.getEmail();
         this.password = entity.getPassword();
-        //this.stores = entity.getStores().stream().map(Store::new).toList();
     }
 }

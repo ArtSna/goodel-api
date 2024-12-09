@@ -7,17 +7,17 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
+import java.util.Objects;
 import java.util.Set;
 import java.util.UUID;
 
 @Entity
 @Table(name = "goodel-users")
 @Data
-@EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
 public class UserEntity extends PanacheEntityBase {
 
-    @Id private UUID id;
+    @Id private UUID id = UUID.randomUUID();
 
     private String firstName;
     private String lastName;
@@ -29,10 +29,22 @@ public class UserEntity extends PanacheEntityBase {
     private Set<StoreEntity> stores = Sets.of();
 
     public UserEntity(String firstName, String lastName, String email, String password) {
-        this.id = UUID.randomUUID();
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.password = password;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id); // Use apenas campos simples (como `id`)
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+        UserEntity that = (UserEntity) obj;
+        return Objects.equals(id, that.getId()); // Compare apenas identificadores únicos
     }
 }

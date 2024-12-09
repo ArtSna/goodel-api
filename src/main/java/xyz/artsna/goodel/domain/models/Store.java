@@ -5,7 +5,6 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import xyz.artsna.goodel.infra.database.entities.*;
 
-import java.util.List;
 import java.util.UUID;
 
 @Data
@@ -27,10 +26,6 @@ public class Store {
     private StoreAddress storeAddress;
 
     private boolean active;
-
-    private List<Employee> employees;
-    private List<Client> clients;
-    private List<Neighborhood> neighborhoods;
 
     private User owner;
 
@@ -55,9 +50,6 @@ public class Store {
         );
         this.active = store.isActive();
         this.owner = new User(store.getOwner());
-        this.employees = store.getEmployees().stream().map(Employee::new).toList();
-        this.clients = store.getClients().stream().map(Client::new).toList();
-        this.neighborhoods = store.getNeighborhoods().stream().map(Neighborhood::new).toList();
     }
 
     @Data
