@@ -30,6 +30,9 @@ public class ClientEntity extends PanacheEntityBase {
     @OneToMany(cascade= CascadeType.ALL, mappedBy="client", fetch = FetchType.EAGER)
     private Set<AddressEntity> addresses = Sets.of();
 
+    @OneToMany(cascade= CascadeType.ALL, mappedBy="client", fetch = FetchType.LAZY)
+    private Set<OrderEntity> orders = Sets.of();
+
     @ManyToOne
     @JoinColumn(name="store_id", nullable=false, updatable=false)
     private StoreEntity store;

@@ -48,6 +48,15 @@ public class StoreEntity extends PanacheEntityBase {
     @OneToMany(cascade= CascadeType.ALL, mappedBy="store", fetch = FetchType.LAZY)
     private Set<NeighborhoodEntity> neighborhoods = Sets.of();
 
+    @OneToMany(cascade= CascadeType.ALL, mappedBy="store", fetch = FetchType.LAZY)
+    private Set<ProductEntity> products = Sets.of();
+
+    @OneToMany(cascade= CascadeType.ALL, mappedBy="store", fetch = FetchType.LAZY)
+    private Set<ProductCategoryEntity> productCategories = Sets.of();
+
+    @OneToMany(cascade= CascadeType.ALL, mappedBy="store", fetch = FetchType.LAZY)
+    private Set<OrderEntity> orders = Sets.of();
+
     @ManyToOne
     @JoinColumn(name="owner_id", nullable=false)
     private UserEntity owner;
